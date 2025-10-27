@@ -18,20 +18,26 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate composer.json and composer.lock
-        run: composer validate --strict
+        run: |
+          cd project
+          composer validate --strict
 
       - name: Cache Composer packages
         id: composer-cache
         uses: actions/cache@v3
         with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          path: C:\Users\Boltimizer\Documents\GIT HUB\Boltimizer
+          key: ${{ runner.os }}-php-${{ hashFiles('project/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: |
+          cd project
+          composer install --prefer-dist --no-progress --no-suggest
 
       # Uncomment this if you have tests defined in composer.json
       # - name: Run test suite
-      #   run: composer run-script test
+      #   run: |
+      #     cd project
+      #     composer run-script test
